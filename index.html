@@ -17,7 +17,23 @@
 
     </style>
 
-  </head>    
+  </head>   
+  <header>
+  <nav class="nav-header-main">
+        <a class="header-logo" href="index.php">
+            <img src="images/Bitcoin_logo.png" alt="logo">
+        </a>
+      <form action="includes/login.inc.php" method="post">
+        <input type="text" name="mailuid" placeholder="Username/Email...">
+        <input type="password" name="pwd" placeholder="Password...">
+        <button type="submit" name="login-submit">Login</button>
+    </form>
+    <a href="signup.php">Singup</a>
+    <form action="includes/logout.inc.php" method="post">
+        <button type="submit" name="logout-submit">Logout</button>
+    </form>
+  </header> 
+  
   <body>    
     <nav class="navbar navbar-dark bg-dark">
         <h1><a href="0" class="navbar-brand"></a></h1>
