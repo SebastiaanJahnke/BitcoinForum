@@ -1,5 +1,19 @@
 <?php
     session_start();
+//HIER VERBIND IK MET DE DATABASE
+$dbhost = "localhost";
+$dbname = "loginbtcforum";
+$user = "root";
+$password = "";
+
+$auteurnaam = $_POST['txtAuteur'];
+$tekst = $_POST['txtTekst'];
+
+try{
+    $pdo = new PDO("mysql:host=".$dbhost.";dbname=".$dbname.";",$user, $password);
+    echo "Du bist verbonden!";
+}catch(PDOException $ex) {
+        echo "Disconnected from PHPmyadmin";} //CONNECTION TEST
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +31,6 @@
         .last-post-col {
           min-width: 12em;
         }
-
     </style>
 
     <nav class="navbar navbar-dark bg-dark">
@@ -53,6 +66,24 @@
     </nav>
     <body>
     <div class="container">
+    <?php
+    $InsertQuery = "INSERT INTO posts (auteur, text) VALUES ('$auteurnaam', '$tekst')";
+    $stm = $pdo->prepare($InsertQuery);
+    if(isset($_POST['btnVerstuur'])){
+        if($stm->execute()){
+            echo "Wir haben es geschafft, es in die Datenbank zu stellen!";
+            }else echo "Irgendwas ist schief gelaufen! Wird nicht in die Datenbank aufgenommen";
+}
+        
+    ?>
+    <div>
+        <form action="post.php" method="post">
+            <input type="text" name="txtAuteur">
+            <input type="text" name="txtTekst">
+            <input type="submit" name="btnVerstuur">
+        </form>
+    </div>
+    
     <nav class="breadcrumb">
       <span class="breadcrumb-item active"></span>
       

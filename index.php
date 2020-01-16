@@ -30,7 +30,6 @@
         
         <h1><a href="0" class="navbar-brand"></a></h1>
         <div class="flex">
-        <a href="post.php">Post</a>        
         <?php
             if (isset($_SESSION['userId'])) {
                 echo '<form action="includes/logout.inc.php" method="post">
@@ -80,27 +79,36 @@
       </thead>
       
     
-      <tbody>
-        <tr>
-          <td>
-            <h3><a href="#0">FORUM NAME</a></h3>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          </td>
-          <td>
-            <div>5</div>
-          </td>
-          <td>
-            <div>18</div>
-          </td>
-          <td>
-            <h4 class="h6"><a href="#0">Post name</a></h4>
-            <div>05 Jan 2020, 20:18</div>
-          </td>
-        </tr>
-        <tr>
+      <tbody><?php
+        $dbhost = "localhost";
+        $dbname = "loginbtcforum";
+        $user = "root";
+        $password = "";
+        try{
+        $pdo = new PDO("mysql:host=".$dbhost.";dbname=".$dbname.";",$user, $password);
+        echo "Du bist verbonden!";
+    }catch(PDOException $ex) {
+            echo "Disconnected from PHPmyadmin";} //CONNECTION TEST
+          
+          
+        $ExtractionQuery = "SELECT * FROM posts";
+        $stm = $pdo->prepare($ExtractionQuery);
+        if($stm->execute()){
+            $Table = $stm->fetchALL(PDO::FETCH_OBJ);
+            
+    foreach($Table as $Record){
+    echo  "<tr>
             <td>
-              <h3><a href="#0">FORUM NAME</a></h3>
-              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <h3><a href='#0'>
+               "
+                . $Record->auteur . ("<br>") . 
+              "
+              </a></h3>
+              <p>
+            "
+                . $Record->text . 
+            "
+                </p>
             </td>
             <td>
               <div>5</div>
@@ -109,42 +117,17 @@
               <div>18</div>
             </td>
             <td>
-              <h4 class="h6"><a href="#0">Post name</a></h4>
+              <h4 class='h6'><a href='#0'>Post name</a></h4>
               <div>05 Jan 2020, 20:18</div>
             </td>
-          </tr>
-          <tr>
-              <td>
-                <h3><a href="#0">FORUM NAME</a></h3>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              </td>
-              <td>
-                <div>5</div>
-              </td>
-              <td>
-                <div>18</div>
-              </td>
-              <td>
-                <h4 class="h6"><a href="#0">Post name</a></h4>
-                <div>05 Jan 2020, 20:18</div>
-              </td>
-            </tr>
-            <tr>
-                <td>
-                  <h3><a href="#0">FORUM NAME</a></h3>
-                  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </td>
-                <td>
-                  <div>5</div>
-                </td>
-                <td>
-                  <div>18</div>
-                </td>
-                <td>
-                  <h4 class="h6"><a href="#0">Post name</a></h4>
-                  <div>05 Jan 2020, 20:18</div>
-                </td>
-              </tr>
+          </tr>";
+       
+    }
+}
+        ?>
+        
+        
+         
       </tbody>
     </table>
     <h2 class="h4 text-white bg-info mb-0 p-4 rounded-top">Forum category</h2>
