@@ -6,19 +6,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="style.css">
     <title>BitcoinForum - Board overview</title>
-
-
   </head>
-
   <header>
-    <nav class="nav-header-main">
-        <a class="header-logo" href="index.html">
-            <img src="images/Bitcoin_logo.png" alt="logo">
+    <nav>
+        <a class="logo" href="login.php">
+            <img class="logo"src="images/Bitcoin_logo.png" alt="logo">
         </a>    
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="login.php">Home</a></li>
             <li><a href="#">Topics</a></li>
             <li><a href="#">Posts</a></li>
             <li><a href="#">Latest Posts</a></li>
@@ -35,7 +32,7 @@
                 <input type="password" name="pwd" placeholder="Password...">
                 <button type="submit" name="login-submit">Login</button>
             </form>
-            <a href="signup.php">Singup</a>';
+            <a href="signup.php">Signup</a>';
             }
         ?>
         </nav>
